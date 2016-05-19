@@ -7,21 +7,28 @@ class First extends Component {
         super(props);
         this.doStuff = this.doStuff.bind(this);
         this.state = {
-            isOperating: false
+            isOperating: false,
+            boom: false
         };
     }
-    doStuff() {
+    doStuff(boom = false, evt) {
         if (this.state.isOperating) {
             return;
         }
 
         this.setState({
-            isOperating: true
+            isOperating: true,
+            boom: false
         });
 
-        this.props.dispatch(addStuff(this.props.currentValue)).then(() => {
+        this.props.dispatch(addStuff(this.props.currentValue, boom)).then(() => {
             this.setState({
                 isOperating: false
+            });
+        }).catch(err => {
+            this.setState({
+                isOperating: false,
+                boom: err.message
             });
         });
     }
@@ -29,8 +36,10 @@ class First extends Component {
         return (
             <div>
                 <h1>Direct Promise observation</h1>
+                {this.state.boom && <p>{this.state.boom}</p>}
                 <p>{this.props.currentValue}</p>
-                <button disabled={this.state.isOperating} onClick={this.doStuff}>Operate on counter</button>
+                <button disabled={this.state.isOperating} onClick={this.doStuff.bind(this, false)}>Operate on counter</button>
+                <button disabled={this.state.isOperating} onClick={this.doStuff.bind(this, true)}>Boom</button>
             </div>
         );
     }

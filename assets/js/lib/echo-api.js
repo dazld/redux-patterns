@@ -12,10 +12,10 @@ export function echo(value, shouldThrow = false) {
     });
 }
 
-export function increment(value) {
-    return echo(value + 1);
+export function increment(value, shouldThrow) {
+    return echo(value + 1, shouldThrow);
 }
 
-export function decrement(value) {
-    return echo(value - 1);
+export function decrement(value, shouldThrow) {
+    return echo(value - 1, shouldThrow);
 }

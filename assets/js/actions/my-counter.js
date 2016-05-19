@@ -25,10 +25,10 @@ function changeOperatingStatus(status) {
     };
 }
 
-export function addStuff(value) {
+export function addStuff(value, shouldThrow = false) {
     return function(dispatch) {
         // this function returns a promise
-        return increment(value)
+        return increment(value, shouldThrow)
                 .then(function(result) {
                     dispatch(addthings(result));
                     return result;
