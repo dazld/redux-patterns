@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { addStuff } from '../actions/my-counter';
 
 class First extends Component {
-    constructor(props){
+    constructor(props) {
         super(props);
         this.doStuff = this.doStuff.bind(this);
         this.state = {
@@ -24,7 +24,6 @@ class First extends Component {
                 isOperating: false
             });
         });
-
     }
     render() {
         return (
@@ -33,18 +32,18 @@ class First extends Component {
                 <p>{this.props.currentValue}</p>
                 <button disabled={this.state.isOperating} onClick={this.doStuff}>Operate on counter</button>
             </div>
-        )
+        );
     }
 }
 
 First.propTypes = {
-    currentValue: PropTypes.number.isRequired
-}
+    currentValue: PropTypes.number.isRequired,
+    dispatch: PropTypes.func.isRequired
+};
 
 
-export default connect(function(state){
-    console.log(state);
+export default connect(function(state) {
     return {
         currentValue: state.myCounter
-    }
+    };
 })(First);

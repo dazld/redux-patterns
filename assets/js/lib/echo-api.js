@@ -8,7 +8,7 @@ export function echo(value, shouldThrow = false) {
             } else {
                 res(value);
             }
-        }, 1000);
+        }, 3000);
     });
 }
 

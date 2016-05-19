@@ -1,6 +1,21 @@
-import { CALCULATE_SIN } from '../actions/my-counter';
+import { combineReducers } from 'redux';
+import {
+    CALCULATE_SIN,
+    CHANGE_STATUS
+} from '../actions/my-counter';
 
-function anotherCounter (state = 0, action) {
+function status(state = false, action) {
+    switch (action.type) {
+        case CHANGE_STATUS:
+            state = action.payload;
+            break;
+        default:
+            break;
+    }
+    return state;
+}
+
+function value (state = 0, action) {
     switch (action.type) {
         case CALCULATE_SIN:
             state = action.payload;
@@ -11,4 +26,7 @@ function anotherCounter (state = 0, action) {
     return state;
 }
 
-export default anotherCounter;
+export default combineReducers({
+    status,
+    value
+});
